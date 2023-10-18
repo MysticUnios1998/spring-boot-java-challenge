@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 public class BookingDto {
     
+    private String id;
     private String name;
     private String email;
     private String origin;

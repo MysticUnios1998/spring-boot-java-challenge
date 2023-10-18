@@ -2,6 +2,7 @@ package booking.model;
 
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,10 @@ import lombok.experimental.NonFinal;
 @Getter
 @ToString
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class Booking {
+
+    private String id;
 
     private String name;
     private String email;
