@@ -31,14 +31,14 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<BookingDto>> getAllBookginsByUser(
         @RequestParam("user") String email
     ) throws BookingException {
         return ResponseEntity.ok().body(bookingService.getAllByUser(email));
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookingDto> getById(
         @PathVariable("id") String bookingId
     ) throws BookingException {

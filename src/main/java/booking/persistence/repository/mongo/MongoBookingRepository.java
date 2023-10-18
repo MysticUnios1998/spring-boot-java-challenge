@@ -4,11 +4,14 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import booking.exception.BookingException;
 import booking.model.entity.mongo.BookingEntity;
 import booking.persistence.repository.BookingRepository;
 
+
+@Repository
 public class MongoBookingRepository implements BookingRepository {
 
     private final MongoBookingInterface mongoInterface;

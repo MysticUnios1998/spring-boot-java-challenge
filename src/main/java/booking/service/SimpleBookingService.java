@@ -3,12 +3,15 @@ package booking.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import booking.exception.BookingException;
 import booking.model.dto.BookingDto;
 import booking.persistence.repository.BookingRepository;
 import booking.util.BookingMapper;
 
+
+@Service
 public class SimpleBookingService implements BookingService {
 
     private final BookingRepository bookingRepository;
@@ -35,8 +38,8 @@ public class SimpleBookingService implements BookingService {
     }
 
     @Override
-    public void saveNewBooking(BookingDto newBooking) throws BookingException {
-        bookingRepository.saveNewBooking(bookingMapper.toBookingEntity(newBooking));
+    public String saveNewBooking(BookingDto newBooking) throws BookingException {
+        return bookingRepository.saveNewBooking(bookingMapper.toBookingEntity(newBooking));
     }
 
     @Override
