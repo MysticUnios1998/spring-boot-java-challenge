@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import booking.exception.BookingException;
 import booking.model.dto.BookingDto;
 import booking.service.BookingService;
-import booking.util.ServiceResponse;
 
 @RestController
 @RequestMapping("/api/v1/booking")
@@ -33,40 +32,43 @@ public class BookingController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse<Collection<BookingDto>>> getAllBookginsByUser(
+    public ResponseEntity<Collection<BookingDto>> getAllBookginsByUser(
         @RequestParam("user") String email
     ) throws BookingException {
         return ResponseEntity.ok().body(bookingService.getAllByUser(email));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse<BookingDto>> getById(
+    public ResponseEntity<BookingDto> getById(
         @PathVariable("id") String bookingId
     ) throws BookingException {
         return ResponseEntity.ok().body(bookingService.getById(bookingId));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse<String>> saveNewBooking(
+    public ResponseEntity<String> saveNewBooking(
         @RequestBody BookingDto newBooking
     ) throws BookingException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.saveNewBooking(newBooking));
+        bookingService.saveNewBooking(newBooking);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse<String>> modifyBooking(
+    public ResponseEntity<String> modifyBooking(
         @RequestBody BookingDto booking,
         @PathVariable("id") String bookingId,
         @RequestParam(value="complete", required=false) boolean completeChange
     ) throws BookingException {
-        return ResponseEntity.ok().body(bookingService.modifyBooking(bookingId, booking, completeChange));
+        bookingService.modifyBooking(bookingId, booking, completeChange);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ServiceResponse<BookingDto>> deleteBooking(
+    public ResponseEntity<BookingDto> deleteBooking(
         @PathVariable("id") String bookingId
     ) throws BookingException {
-        return ResponseEntity.ok().body(bookingService.deleteBooking(bookingId));
+        bookingService.deleteBooking(bookingId);
+        return ResponseEntity.ok().build();
     }
 
     
